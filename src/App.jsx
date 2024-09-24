@@ -16,8 +16,8 @@ function App() {
     <>
       <Menu></Menu>
       {/* <Index></Index> */}
-      <Administrador></Administrador>
-      {/* <FormularioProducto></FormularioProducto> */}
+      {/* <Administrador></Administrador> */}
+      <FormularioProducto></FormularioProducto>
       <Footer></Footer>
     </>
   )
