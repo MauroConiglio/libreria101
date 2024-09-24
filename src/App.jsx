@@ -8,6 +8,7 @@ import DetalleProducto from "./components/pages/DetalleProducto";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import './App.css'
+import './bootstrap.min.css'
 import CardProducto from './components/pages/product/CardProducto.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
