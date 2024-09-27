@@ -17,3 +17,17 @@ export const crearProductoAPI = async(productoNuevo)=>{
     }
 
 }
+
+
+//GET
+
+export const leerProductosAPI = async () =>{
+
+    try {
+        const respuesta = await fetch(URLProductos)
+        return respuesta;
+    } catch (error) {
+        console.error(error)
+        return false
+    }
+}
