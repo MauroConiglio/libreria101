@@ -11,6 +11,7 @@ import './App.css'
 import './bootstrap.min.css'
 import CardProducto from './components/pages/product/CardProducto.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from "./components/pages/Login.jsx"
 
 function App() {
 
@@ -25,6 +26,10 @@ function App() {
             <Route path="/administrador" element={<Administrador></Administrador>}></Route>
             <Route path="/administrador/crear" element={<FormularioProducto></FormularioProducto>}></Route>
             <Route path="/administrador/editar" element={<FormularioProducto></FormularioProducto>}></Route>
+            <Route
+        exact path="/login"
+          element={<Login></Login>}
+        ></Route>
             <Route path="*" element={<Error404></Error404>}></Route>
 
         </Routes>
