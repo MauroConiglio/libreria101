@@ -31,3 +31,16 @@ export const leerProductosAPI = async () =>{
         return false
     }
 }
+
+//GET devuelve unproducto
+export const obtenerProductoAPI = async (id) =>{
+
+    try {
+        const respuesta = await fetch(URLProductos+'/'+id)
+        return respuesta;
+    } catch (error) {
+        console.error(error)
+        return false
+    }
+}
+
