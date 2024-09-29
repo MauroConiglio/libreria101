@@ -1,9 +1,9 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { borrarProductoAPI } from "../../../helpers/queries";
+import { borrarProductoAPI, leerProductosAPI } from "../../../helpers/queries";
 import Swal from "sweetalert2";
 
-const ItemProducto = ({producto,fila}) => {
+const ItemProducto = ({producto,fila, setProductos}) => {
     
     const borrarProducto = async()=>{
       const respuesta = await borrarProductoAPI(producto.id)
@@ -12,8 +12,14 @@ const ItemProducto = ({producto,fila}) => {
           title: "Producto Eliminado",
           text: `El producto ${producto.nombreProducto}, fue eliminado correctamente`,
           icon: "success"
-          //redireccionar a la pagina del adm
+  
         });
+
+        const respuestaProductos = await leerProductosAPI()
+        if(respuestaProductos.status === 200){
+          const productosActualizados = await respuestaProductos.json()
+          setProductos(productosActualizados)
+        }
       }else {
         Swal.fire({
           title: "Ocurrio un error",

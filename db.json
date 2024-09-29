@@ -1,24 +1,3 @@
 {
-  "productos": [
-    {
-      "nombreProducto": "Lapices FaberCastell escolares x 12",
-      "marca": "FaberCastellll",
-      "precio": 4000,
-      "imagen": "https://images.pexels.com/photos/68808/pexels-photo-68808.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      "categoria": "Cuadernos",
-      "descripcion_breve": "Lápices premium con pi",
-      "descripcion_amplia": "Los Faber-Castell Polychromos son lápices de colores profesionales con pigmentos de alta calidad y resistencia a la luz. Su textura cremosa garantiza trazos suaves y colores vibrantes, ideales para técnicas de capas y detalles precisos en el arte",
-      "id": 123
-    },
-    {
-      "nombreProducto": "Acuarelas",
-      "marca": "Giotto",
-      "precio": "500",
-      "imagen": "https://pixabay.com/static/uploads/photo/2016/09/10/17/18/book-1659717_960_720.jpg.",
-      "categoria": "Lapicera",
-      "descripcion_breve": "los lapices estan bien piolas\n",
-      "descripcion_amplia": "los lapices estan super piolas porque son super piolas asi que son super piolas",
-      "id": 125
-    }
-  ]
+  "productos": []
 }
