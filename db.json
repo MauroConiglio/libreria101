@@ -11,16 +11,6 @@
       "id": 123
     },
     {
-      "nombreProducto": "pepe",
-      "marca": "pepe",
-      "precio": "56345",
-      "imagen": "https://pixabay.com/static/uploads/photo/2016/09/10/17/18/book-1659717_960_720.jpg.",
-      "categoria": "Resaltador",
-      "descripcion_breve": "asdasdasfsdfasdfasdf23534634",
-      "descripcion_amplia": "asdfasdfasdfasdfawefasdfasefwafsadasdasdasdasdasfgwsegsdfasdfwqefasdf",
-      "id": 124
-    },
-    {
       "nombreProducto": "Acuarelas",
       "marca": "Giotto",
       "precio": "500",
