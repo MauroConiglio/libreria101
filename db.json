@@ -1,3 +1,14 @@
 {
-  "productos": []
+  "productos": [
+    {
+      "nombreProducto": "lapices",
+      "marca": "FaberCastell",
+      "precio": "5000",
+      "imagen": "https://acdn.mitiendanube.com/stores/001/443/755/products/images-8-a7af67087d05e76eb316180906144627-640-0.jpg",
+      "categoria": "Lapicera",
+      "descripcion_breve": "3sdfgkjsfgksbdgfkjsfbgjbgf",
+      "descripcion_amplia": "skldfngskldfjgnosiuergnsdklfjgnsoierugnsldkfjgnsriugsndfklgserg",
+      "id": 1
+    }
+  ]
 }
