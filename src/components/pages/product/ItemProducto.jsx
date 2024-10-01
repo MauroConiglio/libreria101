@@ -3,31 +3,32 @@ import { Link } from "react-router-dom";
 import { borrarProductoAPI, leerProductosAPI } from "../../../helpers/queries";
 import Swal from "sweetalert2";
 
-const ItemProducto = ({producto,fila, setProductos}) => {
+const ItemProducto = ({producto, fila, setProductos}) => {
     
     const borrarProducto = async()=>{
+      //agregar la ventana de confirmacion
       const respuesta = await borrarProductoAPI(producto.id)
-      if(respuesta.status ===200){
+      if(respuesta.status === 200){
         Swal.fire({
-          title: "Producto Eliminado",
+          title: "Producto eliminado",
           text: `El producto ${producto.nombreProducto}, fue eliminado correctamente`,
-          icon: "success"
-  
+          icon: "success",
         });
-
-        const respuestaProductos = await leerProductosAPI()
+        //actualizar la tabla del administrador
+        const respuestaProductos = await leerProductosAPI();
         if(respuestaProductos.status === 200){
           const productosActualizados = await respuestaProductos.json()
           setProductos(productosActualizados)
         }
-      }else {
+      }else{
         Swal.fire({
           title: "Ocurrio un error",
-          text: `El producto ${producto.nombreProducto}, no pudo ser eliminado correctamente`,
-          icon: "error"
+          text: `El producto ${producto.nombreProducto} no pudo ser eliminado, intente esta operación en unos minutos.`,
+          icon: "error",
         });
       }
     }
+
     return (
         <tr>
         <td className="text-center">{fila}</td>

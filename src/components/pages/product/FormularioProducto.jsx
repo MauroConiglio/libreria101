@@ -1,11 +1,11 @@
 import { Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { crearProductoAPI , editarProductoAPI, obtenerProductoAPI } from "../../../helpers/queries";
-import Swal from "sweetalert2"
+import { crearProductoAPI, editarProductoAPI, obtenerProductoAPI } from "../../../helpers/queries";
+import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
-const FormularioProducto = ({titulo, estoyCreando}) => {
+const FormularioProducto = ({ titulo, estoyCreando }) => {
   const {
     register,
     handleSubmit,
@@ -15,20 +15,21 @@ const FormularioProducto = ({titulo, estoyCreando}) => {
   } = useForm();
 
   const {id} = useParams()
-  const navegacion = useNavigate()
+  const navegacion = useNavigate();
+ 
 
   useEffect(()=>{
-    if (!estoyCreando){
+    //si estoy editando el producto
+    if(!estoyCreando){
       cargarProductoEnFormulario()
     }
   },[])
 
   const cargarProductoEnFormulario = async()=>{
-    const respuesta = await obtenerProductoAPI(id)
+    const respuesta = await obtenerProductoAPI(id);
     if(respuesta.status === 200){
       //rellenar mi formulario
       const datoProducto = await respuesta.json()
-      //
       setValue('nombreProducto', datoProducto.nombreProducto)
       setValue('precio', datoProducto.precio)
       setValue('marca', datoProducto.marca)
@@ -36,54 +37,46 @@ const FormularioProducto = ({titulo, estoyCreando}) => {
       setValue('categoria', datoProducto.categoria)
       setValue('descripcion_breve', datoProducto.descripcion_breve)
       setValue('descripcion_amplia', datoProducto.descripcion_amplia)
-
-
     }
   }
 
- 
-
   const productoValidado = async (producto) => {
-    if(estoyCreando === true){
+    if (estoyCreando) {
       //pedir a la api crear un producto
-    const respuesta = await crearProductoAPI(producto)
-   
-    if (respuesta.status === 201){
-      Swal.fire({
-        title: "Producto Creado",
-        text: `El producto ${producto.nombreProducto}, fue creado correctamente`,
-        icon: "success"
-      });
-      reset();
-    }else{
-      Swal.fire({
-        title: "Ocurrio un error",
-        text: `El producto ${producto.nombreProducto}, no pudo ser creado correctamente`,
-        icon: "error"
-      });
-    }
-
-    } else {
-      //solicitar ala API editar el pruducto
-      const respuesta = await editarProductoAPI(producto,id)
-      if (respuesta.status === 200){
+      const respuesta = await crearProductoAPI(producto);
+      if (respuesta.status === 201) {
         Swal.fire({
-          title: "Producto Editado",
-          text: `El producto ${producto.nombreProducto}, fue editado correctamente`,
-          icon: "success"
-          //redireccionar a la pagina del adm
+          title: "Producto creado",
+          text: `El producto ${producto.nombreProducto}, fue creado correctamente`,
+          icon: "success",
         });
-        navegacion('/administrador')
-        
+        reset();
       } else {
         Swal.fire({
           title: "Ocurrio un error",
-          text: `El producto ${producto.nombreProducto}, no pudo ser editado correctamente`,
-          icon: "error"
+          text: `El producto ${producto.nombreProducto} no pudo ser creado, intente esta operación en unos minutos.`,
+          icon: "error",
+        });
+      }
+    } else {
+      //solicitar a la api editar el producto
+      const respuesta = await editarProductoAPI(producto, id)
+      if(respuesta.status === 200){
+        Swal.fire({
+          title: "Producto editado",
+          text: `El producto ${producto.nombreProducto}, fue editado correctamente`,
+          icon: "success",
+        });
+        //redireccionar a la pagina del admin
+        navegacion('/administrador')
+      }else{
+        Swal.fire({
+          title: "Ocurrio un error",
+          text: `El producto ${producto.nombreProducto} no pudo ser editado, intente esta operación en unos minutos.`,
+          icon: "error",
         });
       }
     }
-    
   };
 
   return (
@@ -123,19 +116,15 @@ const FormularioProducto = ({titulo, estoyCreando}) => {
               required: "La marca es obligatoria",
               minLength: {
                 value: 2,
-                message:
-                  "Debe ingresar como minimo 2 caracteres",
+                message: "Debe ingresar como minimo 2 caracteres",
               },
               maxLength: {
                 value: 50,
-                message:
-                  "Debe ingresar como maximo 50 caracteres",
+                message: "Debe ingresar como maximo 50 caracteres",
               },
             })}
           />
-          <Form.Text className="text-danger">
-            {errors.marca?.message}
-          </Form.Text>
+          <Form.Text className="text-danger">{errors.marca?.message}</Form.Text>
         </Form.Group>
         <Form.Group className="mb-3" controlId="formPrecio">
           <Form.Label>Precio*</Form.Label>
@@ -183,10 +172,10 @@ const FormularioProducto = ({titulo, estoyCreando}) => {
             })}
           >
             <option value="">Seleccione una opcion</option>
+            <option value="Arte">Arte</option>
             <option value="Cuadernos">Cuadernos</option>
-            <option value="Lapicera">Lapicera</option>
-            <option value="Resaltador">Resaltador</option>
-          
+            <option value="Escritura">Escritura</option>
+            <option value="Hojas">Hojas</option>
           </Form.Select>
           <Form.Text className="text-danger">
             {errors.categoria?.message}
@@ -206,9 +195,9 @@ const FormularioProducto = ({titulo, estoyCreando}) => {
                   "Debe ingresar como minimo 3 caracteres para la descripcion breve",
               },
               maxLength: {
-                value: 30,
+                value: 50,
                 message:
-                  "Debe ingresar como maximo 30 caracteres para la descripcion breve",
+                  "Debe ingresar como maximo 50 caracteres para la descripcion breve",
               },
             })}
           />
@@ -241,7 +230,7 @@ const FormularioProducto = ({titulo, estoyCreando}) => {
           </Form.Text>
         </Form.Group>
 
-        <Button type="submit" variant="success">
+        <Button type="submit" variant="primary">
           Guardar
         </Button>
       </Form>

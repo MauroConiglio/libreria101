@@ -1,32 +1,32 @@
 import { Button, Table } from "react-bootstrap";
 import ItemProducto from "./product/ItemProducto";
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react";
 import { leerProductosAPI, URLProductos } from "../../helpers/queries";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 
 const Administrador = () => {
+  const [productos, setProductos] = useState([])
 
-    const[productos,setProductos] = useState([])  
+  useEffect(()=>{
+   obtenerProductos();
+  },[])
 
-    useEffect(()=>{
-        obtenerProductos()
-    }, [])
-
-    const obtenerProductos = async()=>{
-      const respuesta = await leerProductosAPI()
-      if(respuesta.status === 200){
-        const datos = await respuesta.json()
-        setProductos(datos);
-      }else{
-        Swal.fire({
-          title: "Ocurrio un error",
-          text: `no pudo obtener el listado de productos`,
-          icon: "error"
-        });
-      }
-    }
+  const obtenerProductos = async()=>{
+   const respuesta = await leerProductosAPI();
+   if(respuesta.status === 200){
+    const datos = await respuesta.json();
+    setProductos(datos);
+   }else{
+    Swal.fire({
+      title: "Ocurrio un error",
+      text: `No se pudo obtener el listado de productos, intente esta operación en unos minutos.`,
+      icon: "error"
+    });
+   }
+  }
+  
 
     return (
         <section className="container mainSection">
@@ -50,8 +50,8 @@ const Administrador = () => {
           </thead>
           <tbody>
             {
-              productos.map((producto,posicion)=> <ItemProducto key={producto.id} producto={producto} fila={posicion+1} setProductos={setProductos}></ItemProducto>)
-              
+              productos.map((producto, posicion)=>  <ItemProducto key={producto.id} producto={producto} fila={posicion+1} setProductos={setProductos}></ItemProducto>)
+             
             }
           </tbody>
         </Table>
